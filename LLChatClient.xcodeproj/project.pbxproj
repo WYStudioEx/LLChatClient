@@ -15,6 +15,11 @@
 		6932D5E51F4BEE07006E2970 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6932D5E31F4BEE07006E2970 /* LaunchScreen.storyboard */; };
 		6932D5F01F4BEE07006E2970 /* LLChatClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D5EF1F4BEE07006E2970 /* LLChatClientTests.m */; };
 		6932D5FB1F4BEE07006E2970 /* LLChatClientUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D5FA1F4BEE07006E2970 /* LLChatClientUITests.m */; };
+		6932D6141F4BEE3B006E2970 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D60C1F4BEE3B006E2970 /* GCDAsyncSocket.m */; };
+		6932D6151F4BEE3B006E2970 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D60E1F4BEE3B006E2970 /* GCDAsyncUdpSocket.m */; };
+		6932D6161F4BEE3B006E2970 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D6111F4BEE3B006E2970 /* AsyncSocket.m */; };
+		6932D6171F4BEE3B006E2970 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D6131F4BEE3B006E2970 /* AsyncUdpSocket.m */; };
+		6932D61C1F4BFB0A006E2970 /* yiluyasha.png in Resources */ = {isa = PBXBuildFile; fileRef = 6932D61B1F4BFB0A006E2970 /* yiluyasha.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,16 @@
 		6932D5F61F4BEE07006E2970 /* LLChatClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLChatClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6932D5FA1F4BEE07006E2970 /* LLChatClientUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatClientUITests.m; sourceTree = "<group>"; };
 		6932D5FC1F4BEE07006E2970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6932D60B1F4BEE3B006E2970 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		6932D60C1F4BEE3B006E2970 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		6932D60D1F4BEE3B006E2970 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		6932D60E1F4BEE3B006E2970 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		6932D6101F4BEE3B006E2970 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		6932D6111F4BEE3B006E2970 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		6932D6121F4BEE3B006E2970 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		6932D6131F4BEE3B006E2970 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		6932D6181F4BEE4C006E2970 /* ChatProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatProtocol.h; sourceTree = "<group>"; };
+		6932D61B1F4BFB0A006E2970 /* yiluyasha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yiluyasha.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +116,9 @@
 		6932D5D41F4BEE07006E2970 /* LLChatClient */ = {
 			isa = PBXGroup;
 			children = (
+				6932D61B1F4BFB0A006E2970 /* yiluyasha.png */,
+				6932D6181F4BEE4C006E2970 /* ChatProtocol.h */,
+				6932D6081F4BEE33006E2970 /* Vendor */,
 				6932D5D81F4BEE07006E2970 /* AppDelegate.h */,
 				6932D5D91F4BEE07006E2970 /* AppDelegate.m */,
 				6932D5DB1F4BEE07006E2970 /* ViewController.h */,
@@ -138,6 +156,45 @@
 				6932D5FC1F4BEE07006E2970 /* Info.plist */,
 			);
 			path = LLChatClientUITests;
+			sourceTree = "<group>";
+		};
+		6932D6081F4BEE33006E2970 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				6932D6091F4BEE3B006E2970 /* AsyncSocket */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		6932D6091F4BEE3B006E2970 /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				6932D60A1F4BEE3B006E2970 /* GCD */,
+				6932D60F1F4BEE3B006E2970 /* RunLoop */,
+			);
+			path = AsyncSocket;
+			sourceTree = "<group>";
+		};
+		6932D60A1F4BEE3B006E2970 /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				6932D60B1F4BEE3B006E2970 /* GCDAsyncSocket.h */,
+				6932D60C1F4BEE3B006E2970 /* GCDAsyncSocket.m */,
+				6932D60D1F4BEE3B006E2970 /* GCDAsyncUdpSocket.h */,
+				6932D60E1F4BEE3B006E2970 /* GCDAsyncUdpSocket.m */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
+		6932D60F1F4BEE3B006E2970 /* RunLoop */ = {
+			isa = PBXGroup;
+			children = (
+				6932D6101F4BEE3B006E2970 /* AsyncSocket.h */,
+				6932D6111F4BEE3B006E2970 /* AsyncSocket.m */,
+				6932D6121F4BEE3B006E2970 /* AsyncUdpSocket.h */,
+				6932D6131F4BEE3B006E2970 /* AsyncUdpSocket.m */,
+			);
+			path = RunLoop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +264,7 @@
 				TargetAttributes = {
 					6932D5D11F4BEE07006E2970 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = GW437K87JA;
 						ProvisioningStyle = Automatic;
 					};
 					6932D5EA1F4BEE07006E2970 = {
@@ -247,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6932D5E51F4BEE07006E2970 /* LaunchScreen.storyboard in Resources */,
+				6932D61C1F4BFB0A006E2970 /* yiluyasha.png in Resources */,
 				6932D5E21F4BEE07006E2970 /* Assets.xcassets in Resources */,
 				6932D5E01F4BEE07006E2970 /* Main.storyboard in Resources */,
 			);
@@ -273,9 +332,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6932D6141F4BEE3B006E2970 /* GCDAsyncSocket.m in Sources */,
+				6932D6151F4BEE3B006E2970 /* GCDAsyncUdpSocket.m in Sources */,
 				6932D5DD1F4BEE07006E2970 /* ViewController.m in Sources */,
+				6932D6161F4BEE3B006E2970 /* AsyncSocket.m in Sources */,
 				6932D5DA1F4BEE07006E2970 /* AppDelegate.m in Sources */,
 				6932D5D71F4BEE07006E2970 /* main.m in Sources */,
+				6932D6171F4BEE3B006E2970 /* AsyncUdpSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,9 +487,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GW437K87JA;
 				INFOPLIST_FILE = LLChatClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = luoluo.LLChatClient;
+				PRODUCT_BUNDLE_IDENTIFIER = luoluo.LLPushStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -435,9 +499,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GW437K87JA;
 				INFOPLIST_FILE = LLChatClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = luoluo.LLChatClient;
+				PRODUCT_BUNDLE_IDENTIFIER = luoluo.LLPushStream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
