@@ -20,6 +20,7 @@
 		6932D6161F4BEE3B006E2970 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D6111F4BEE3B006E2970 /* AsyncSocket.m */; };
 		6932D6171F4BEE3B006E2970 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6932D6131F4BEE3B006E2970 /* AsyncUdpSocket.m */; };
 		6932D61C1F4BFB0A006E2970 /* yiluyasha.png in Resources */ = {isa = PBXBuildFile; fileRef = 6932D61B1F4BFB0A006E2970 /* yiluyasha.png */; };
+		69F47E621F4D4E9300AF1916 /* LLAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F47E611F4D4E9300AF1916 /* LLAudio.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		6932D6131F4BEE3B006E2970 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		6932D6181F4BEE4C006E2970 /* ChatProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatProtocol.h; sourceTree = "<group>"; };
 		6932D61B1F4BFB0A006E2970 /* yiluyasha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yiluyasha.png; sourceTree = "<group>"; };
+		69F47E601F4D4E9300AF1916 /* LLAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAudio.h; sourceTree = "<group>"; };
+		69F47E611F4D4E9300AF1916 /* LLAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAudio.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,7 @@
 			children = (
 				6932D61B1F4BFB0A006E2970 /* yiluyasha.png */,
 				6932D6181F4BEE4C006E2970 /* ChatProtocol.h */,
+				69F47E5A1F4D45D500AF1916 /* Audio */,
 				6932D6081F4BEE33006E2970 /* Vendor */,
 				6932D5D81F4BEE07006E2970 /* AppDelegate.h */,
 				6932D5D91F4BEE07006E2970 /* AppDelegate.m */,
@@ -195,6 +199,15 @@
 				6932D6131F4BEE3B006E2970 /* AsyncUdpSocket.m */,
 			);
 			path = RunLoop;
+			sourceTree = "<group>";
+		};
+		69F47E5A1F4D45D500AF1916 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				69F47E601F4D4E9300AF1916 /* LLAudio.h */,
+				69F47E611F4D4E9300AF1916 /* LLAudio.m */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +351,7 @@
 				6932D6161F4BEE3B006E2970 /* AsyncSocket.m in Sources */,
 				6932D5DA1F4BEE07006E2970 /* AppDelegate.m in Sources */,
 				6932D5D71F4BEE07006E2970 /* main.m in Sources */,
+				69F47E621F4D4E9300AF1916 /* LLAudio.m in Sources */,
 				6932D6171F4BEE3B006E2970 /* AsyncUdpSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +586,7 @@
 				6932D6011F4BEE07006E2970 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6932D6021F4BEE07006E2970 /* Build configuration list for PBXNativeTarget "LLChatClientTests" */ = {
 			isa = XCConfigurationList;
@@ -580,6 +595,7 @@
 				6932D6041F4BEE07006E2970 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6932D6051F4BEE07006E2970 /* Build configuration list for PBXNativeTarget "LLChatClientUITests" */ = {
 			isa = XCConfigurationList;
@@ -588,6 +604,7 @@
 				6932D6071F4BEE07006E2970 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

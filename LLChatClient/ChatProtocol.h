@@ -10,7 +10,7 @@
 #define TCPClientDemo1407_ChatProtocol_h
 
 //聊天客户端和服务端的通讯协议
-
+#define LLChatStart "LLChatStart"
 //定义请求头结构体
 typedef enum ChatRequestType {
     ChatRequestTypeUnkonw =0,
@@ -21,6 +21,7 @@ typedef enum ChatRequestType {
     ChatRequestTypeReciveMessage,
     ChatRequestTypeUploadHeadImage,
     ChatRequestTypeDeleteHeadImage,
+    ChatRequestTypeAudioMessage,
 }ChatRequestType;
 
 typedef struct ChatRequestHead
@@ -28,6 +29,7 @@ typedef struct ChatRequestHead
     ChatRequestType type;   //请求类型
     int subType;    //请求子类型
     int length; //附加内容长度
+    char start[12];//作为标识信息的开始头
 }ChatRequestHead;
 
 
@@ -61,7 +63,15 @@ typedef struct ChatUploadHeadImageRequest
 {
     ChatRequestHead head;
     char username[32];
-    Byte picture[80000];
+    Byte picture[80000];//限制图片8M
 }ChatUploadHeadImageRequest;
+
+//========语音消息=======
+typedef struct ChatAudioMessageRequest
+{
+    ChatRequestHead head;
+    char username[32];
+    Byte audioData[736];//没包大小736
+}ChatAudioMessageRequest;
 
 #endif

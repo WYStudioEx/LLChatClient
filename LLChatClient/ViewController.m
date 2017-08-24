@@ -7,10 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "AsyncSocket.h"
+#import "GCDAsyncSocket.h"
 #import "ChatProtocol.h"
+#import "LLAudio.h"
 
-@interface ViewController ()<AsyncSocketDelegate>
+@interface ViewController ()<GCDAsyncSocketDelegate,LLAudioDelegete>
 @property (weak, nonatomic) IBOutlet UITextField *userNameTF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -19,7 +20,7 @@
 
 @implementation ViewController{
     //用于连接服务端的socket
-    AsyncSocket *_clientSocket;
+    GCDAsyncSocket *_clientSocket;
 }
 
 - (void)viewDidLoad {
@@ -40,13 +41,13 @@
     
     
     //创建
-    _clientSocket = [[AsyncSocket alloc] initWithDelegate:self];
+    _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     //TCP需要连接服务器才能发送数据
     //注意: 不是一旦执行连接方法就连接成功的
     NSError *error = nil;
     // 10.3.132.7   127.0.0.1
-    [_clientSocket connectToHost:@"192.168.1.103" onPort:5678 withTimeout:-1 error:&error];
+    [_clientSocket connectToHost:@"192.168.1.104" onPort:5678 withTimeout:-1 error:&error];
     if(error != nil)
     {
         NSLog(@"连接方法执行失败");
@@ -65,6 +66,7 @@
     //创建登录请求
     ChatLoginRequest request;
     request.head.type = ChatRequestTypeLogin;
+    strcpy(request.head.start, LLChatStart);
     strcpy(request.username, self.userNameTF.text.UTF8String);
     strcpy(request.password, self.passwordTF.text.UTF8String);
     
@@ -77,6 +79,7 @@
     //创建请求
     ChatRegisterRequest request;
     request.head.type = ChatRequestTypeRegister;
+    strcpy(request.head.start, LLChatStart);
     strcpy(request.username,self.userNameTF.text.UTF8String);
     strcpy(request.password,self.passwordTF.text.UTF8String);
     
@@ -87,6 +90,7 @@
 - (IBAction)uploadImageAction:(UIButton *)sender {
     ChatUploadHeadImageRequest request;
     request.head.type = ChatRequestTypeUploadHeadImage;
+    strcpy(request.head.start, LLChatStart);
     
     NSData *data = UIImagePNGRepresentation([UIImage imageNamed:@"yiluyasha.png"]);
     
@@ -103,15 +107,25 @@
     NSLog(@"SendDataLenght:%d",(int)data2.length);
 }
 
-#pragma mark AsyncSocketDelegate
+//语音对讲
+- (IBAction)StartAudioAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    //开始语音对讲
+    LLAudio *manager = [LLAudio sharedInstance];
+    manager.delegete = self;
+    [manager startRecoderAndPlay];
+}
+
+
+#pragma mark GCDAsyncSocketDelegate
 //代理方法, 当发送完数据之后执行
--(void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
     //准备读取数据
     [_clientSocket readDataWithTimeout:-1 tag:100];
 }
 //代理方法, 当接收到数据之后执行
--(void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     ChatResponseHead head;
     [data getBytes:&head length:sizeof(ChatResponseHead)];
@@ -121,9 +135,29 @@
 
 
 //代理方法, 当连接成功后执行
--(void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
     NSLog(@"连接成功");
+}
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
+{
+    NSLog(@"失去连接%@",err);
+}
+
+#pragma mark LLAudiodelegete
+-(void)sendData:(NSData *)data
+{
+    ChatAudioMessageRequest request;
+    request.head.type = ChatRequestTypeAudioMessage;
+    request.head.length = (int)data.length;
+    strcpy(request.head.start, LLChatStart);
+    strcpy(request.username,self.userNameTF.text.UTF8String);
+    memset(request.audioData, 0, sizeof(request.audioData));
+    memcpy(request.audioData, [data bytes], data.length);
+    
+    NSLog(@"录音长度:%d headlenght:%d",(int)data.length,request.head.length);
+    NSData *data2 = [[NSData alloc] initWithBytes:&request length:sizeof(ChatAudioMessageRequest)];
+    [_clientSocket writeData:data2 withTimeout:-1 tag:100];
 }
 
 

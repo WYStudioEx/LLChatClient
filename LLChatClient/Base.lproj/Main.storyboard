@@ -48,7 +48,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMe-xz-5UN">
-                                <rect key="frame" x="70" y="185" width="34" height="30"/>
+                                <rect key="frame" x="70" y="185" width="34" height="91.5"/>
                                 <state key="normal" title="login">
                                     <color key="titleColor" red="0.068835006476683946" green="0.019285335388806488" blue="0.015676847441015464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbk-lq-fge">
-                                <rect key="frame" x="210" y="185" width="57" height="30"/>
+                                <rect key="frame" x="210" y="216" width="57" height="30"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="0.068835006476683946" green="0.048923732419225707" blue="0.033747607574165679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -66,7 +66,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBF-Me-FSY">
-                                <rect key="frame" x="70" y="257" width="91" height="30"/>
+                                <rect key="frame" x="70" y="318.5" width="91" height="30"/>
                                 <state key="normal" title="UploadImage">
                                     <color key="titleColor" red="0.068835006476683946" green="0.055111975622609555" blue="0.03227273911214764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -75,17 +75,32 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qWB-j0-Ec6">
-                                <rect key="frame" x="70" y="328" width="179" height="179"/>
+                                <rect key="frame" x="70" y="389.5" width="179" height="179"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="179" id="H7i-Yq-yWY"/>
                                     <constraint firstAttribute="width" secondItem="qWB-j0-Ec6" secondAttribute="height" multiplier="1:1" id="dJR-jm-5BF"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y38-ud-Um6">
+                                <rect key="frame" x="237" y="318.5" width="73" height="30"/>
+                                <state key="normal" title="StartAudio">
+                                    <color key="titleColor" red="0.06754454545435512" green="0.95464297279792742" blue="0.079821583868497151" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="Stop">
+                                    <color key="titleColor" red="0.95464297279792742" green="0.48364876912127536" blue="0.25455113560658449" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="StartAudioAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ecg-2I-2yu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="y38-ud-Um6" firstAttribute="leading" secondItem="XBF-Me-FSY" secondAttribute="trailing" constant="76" id="02N-dw-hzh"/>
                             <constraint firstItem="qMe-xz-5UN" firstAttribute="top" secondItem="N01-zK-Sae" secondAttribute="bottom" constant="65" id="4bS-Vm-scH"/>
+                            <constraint firstItem="y38-ud-Um6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5am-LC-lmi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LYx-UW-J9N" secondAttribute="trailing" constant="28" id="78Z-ZK-S99"/>
+                            <constraint firstItem="XBF-Me-FSY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="8qp-gr-LdH"/>
                             <constraint firstItem="Xzo-SS-TeR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="25" id="9uR-oz-IdU"/>
                             <constraint firstItem="B3r-qz-9bO" firstAttribute="width" secondItem="LYx-UW-J9N" secondAttribute="width" id="AOh-CV-4T5"/>
                             <constraint firstItem="N01-zK-Sae" firstAttribute="top" secondItem="Xzo-SS-TeR" secondAttribute="bottom" constant="33" id="DhF-gl-eQu"/>
