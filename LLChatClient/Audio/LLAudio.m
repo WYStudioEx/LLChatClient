@@ -22,6 +22,8 @@
 #define kDefaultOutputBufferSize 1024*4 //7040
 #define PackageSize 1024 //录音包，每包最大字节数
 
+#define kXDXRecoderPCMTotalPacket           512
+
 @interface LLAudio()
 @property (assign, nonatomic) AudioQueueRef                 inputQueue;
 @property (assign, nonatomic) AudioQueueRef                 outputQueue;

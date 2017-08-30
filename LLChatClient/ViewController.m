@@ -10,6 +10,8 @@
 #import "GCDAsyncSocket.h"
 #import "ChatProtocol.h"
 #import "LLAudio.h"
+#import "LLAudioQueuePlayer.h"
+#import "LLAudioUnit.h"
 
 @interface ViewController ()<GCDAsyncSocketDelegate,LLAudioDelegete>
 @property (weak, nonatomic) IBOutlet UITextField *userNameTF;
@@ -18,10 +20,15 @@
 
 @end
 
-@implementation ViewController{
+@implementation ViewController
+{
+//    NSString *_name;
+    NSString *name;
     //用于连接服务端的socket
     GCDAsyncSocket *_clientSocket;
 }
+@synthesize audioData;
+//@synthesize name = _name;//指定属性name用的成员变量为_name
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,7 +59,15 @@
     {
         NSLog(@"连接方法执行失败");
     }
+    self.audioData = @"haha";
 
+//    self.name = @"2222";
+    name = @"dddd";
+    [self setValue:@"333" forKey:@"name"];
+    NSLog(@"selfname:%@ _name:%@ %@ %@",name,name,name,self.audioData);
+    
+    LLAudioUnit *unit = [LLAudioUnit sharedInstance];
+    [unit configureAudioSession];
 }
 
 
@@ -111,9 +126,25 @@
 - (IBAction)StartAudioAction:(UIButton *)sender {
     sender.selected = !sender.selected;
     //开始语音对讲
-    LLAudio *manager = [LLAudio sharedInstance];
-    manager.delegete = self;
-    [manager startRecoderAndPlay];
+//    LLAudio *manager = [LLAudio sharedInstance];
+//    manager.delegete = self;
+//    [manager startRecoderAndPlay];
+    
+    LLAudioUnit *unit = [LLAudioUnit sharedInstance];
+    LLAudioQueuePlayer *player = [LLAudioQueuePlayer sharedInstance];
+    if (sender.selected) {
+        //start Recorder
+        [unit startAudioUnitRecorder];
+        
+        
+        [player  setAudioFormat:unit->dataFormat];
+        //start player
+        [[LLAudioQueuePlayer sharedInstance]startPlay];
+    }else{
+        [unit stopAudioUnitRecorder];
+        [player stop];
+    }
+    
 }
 
 

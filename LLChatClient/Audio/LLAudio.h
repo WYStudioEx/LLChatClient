@@ -11,6 +11,7 @@
 @protocol LLAudioDelegete <NSObject>
 
 @optional
+@property(nonatomic,copy)NSString *audioData;
 -(void)sendData:(NSData *)data;
 
 @end
