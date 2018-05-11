@@ -139,7 +139,7 @@
         
         [player  setAudioFormat:unit->dataFormat];
         //start player
-        [[LLAudioQueuePlayer sharedInstance]startPlay];
+        [player startPlay];
     }else{
         [unit stopAudioUnitRecorder];
         [player stop];

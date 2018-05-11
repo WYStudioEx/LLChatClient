@@ -123,9 +123,11 @@ static OSStatus RecordCallback(void *inRefCon,
         for (int i= 0; i<bufferList->mNumberBuffers; i++) {
             [aacData appendData:[NSData dataWithBytes:bufferList->mBuffers[i].mData length:bufferList->mBuffers[i].mDataByteSize]];
         }
-        //开始播放
+        //测试播放
         LLAudioQueuePlayer *player = [LLAudioQueuePlayer sharedInstance];
         [player.receiveData addObject:aacData];
+        //@end
+        
        
         NSLog(@"aac dataSize:%d",(int)aacData.length);
         // 因为采样不可能每次都精准的采集到1024个样点，所以如果大于2048大小就先填满2048，剩下的跟着下一次采集一起送给转换器
@@ -180,6 +182,7 @@ static OSStatus RecordCallback(void *inRefCon,
     if (status != noErr) {
      NSLog(@"Audio Recoder couldn't initialize AURemoteIO instance, status : %d \n",status);
     }
+   
 }
 
 //基本信息配置
@@ -188,20 +191,22 @@ static OSStatus RecordCallback(void *inRefCon,
     // 配置AudioUnit基本信息
     AudioComponentDescription audioDesc;
     audioDesc.componentType         = kAudioUnitType_Output;
-    // 如果你的应用程序需要去除回声将componentSubType设置为kAudioUnitSubType_VoiceProcessingIO，否则根据需求设置为其他，在博客中有介绍
+    // 如果你的应用程序需要去除回声将componentSubType设置为kAudioUnitSubType_VoiceProcessingIO
     audioDesc.componentSubType      = kAudioUnitSubType_VoiceProcessingIO;//kAudioUnitSubType_VoiceProcessingIO;
-    // 苹果自己的标志
+    //厂商
     audioDesc.componentManufacturer = kAudioUnitManufacturer_Apple;
     audioDesc.componentFlags        = 0;
     audioDesc.componentFlagsMask    = 0;
-    
+    //根据描述找出实际的AudioUnit类型
     AudioComponent inputComponent = AudioComponentFindNext(NULL, &audioDesc);
-    // 新建一个AudioComponent对象，只有这步完成才能进行后续步骤，所以顺序不可颠倒
+    //创建并添加一个引用
     status = AudioComponentInstanceNew(inputComponent, &_audioUnit);
     if (status != noErr)  {
         _audioUnit = NULL;
         //        log4cplus_info("Audio Recoder", "couldn't create a new instance of AURemoteIO, status : %d \n",status);
     }
+    
+    
 }
 
 // 因为本例只做录音功能，未实现播放功能，所以没有设置播放相关设置。
@@ -209,7 +214,7 @@ static OSStatus RecordCallback(void *inRefCon,
     OSStatus status;
     [self setUpRecoderWithFormatID:kAudioFormatLinearPCM];
     
-    // 应用audioUnit设置的格式
+    //将格式设置给Unit
     status = AudioUnitSetProperty(_audioUnit,
                                   kAudioUnitProperty_StreamFormat,
                                   kAudioUnitScope_Output,
@@ -228,12 +233,12 @@ static OSStatus RecordCallback(void *inRefCon,
                          &echoCancellation,
                          sizeof(echoCancellation));
     
-    // AudioUnit输入端默认是关闭，需要将他打开
+    // AudioUnit输入端默认是关闭，需要将他打开 即设置IO口1连接到麦克风
     UInt32 flag = 1;
     status      = AudioUnitSetProperty(_audioUnit,
                                        kAudioOutputUnitProperty_EnableIO,
                                        kAudioUnitScope_Input,
-                                       INPUT_BUS,
+                                       INPUT_BUS,//Element1连接到麦克风
                                        &flag,
                                        sizeof(flag));
     if (status != noErr) {
@@ -260,11 +265,12 @@ static OSStatus RecordCallback(void *inRefCon,
     dataFormat.mChannelsPerFrame = 1;
     
     if (formatID == kAudioFormatLinearPCM) {
-       
+       //声音格式是用int类型存储的 目前左右声道是交错存在mBuffers[0] 如果不需要交错请设置kAudioFormatFlagIsNonInterleaved
         dataFormat.mFormatFlags     = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
         
-        
+        //每个采样点使用2个字节*8bit存储 即SInt16
         dataFormat.mBitsPerChannel  = 16;
+        //目前左右通道未分开 所以需要使用乘以通道数  类型用Byte
         dataFormat.mBytesPerPacket  = dataFormat.mBytesPerFrame = (dataFormat.mBitsPerChannel / 8) * dataFormat.mChannelsPerFrame;
         dataFormat.mFramesPerPacket = kXDXRecoderPCMFramesPerPacket; // 用AudioQueue采集pcm需要这么设置
     }
